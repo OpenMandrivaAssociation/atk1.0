@@ -13,8 +13,8 @@
 %define lib_name %mklibname %{name}_ %{lib_major}
 
 Name: %{pkgname}%{api_version}
-Version: 1.19.3
-Release: %mkrel 3
+Version: 1.19.6
+Release: %mkrel 1
 Summary: Accessibility features for Gtk+
 License: LGPL
 Group: Accessibility
