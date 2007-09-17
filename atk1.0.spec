@@ -11,9 +11,10 @@
 %define req_glib2_version 2.5.7
 
 %define lib_name %mklibname %{name}_ %{lib_major}
+%define develname %mklibname -d %{name}
 
 Name: %{pkgname}%{api_version}
-Version: 1.19.6
+Version: 1.20.0
 Release: %mkrel 1
 Summary: Accessibility features for Gtk+
 License: LGPL
@@ -69,7 +70,7 @@ through applications, determine the state of controls, and read text via
 text to speech conversion. On-screen keyboards replace physical
 keyboards, and head-mounted pointers replace mice.
 
-%package -n %{lib_name}-devel
+%package -n %{develname}
 Summary: Stuff for developing with atk
 Group: Development/C
 Obsoletes:	%{pkgname}-devel lib%{pkgname}-devel
@@ -79,8 +80,9 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{lib_name} = %{version}
 Requires:	libglib2.0-devel >= %{req_glib2_version}
 Conflicts:  libatk10-devel
+Obsoletes: %mklibname -d %{name}_ 0
 
-%description -n %{lib_name}-devel
+%description -n %develname
 ATK, the Accessibility Tookit, is used to obtain accessibily information
 from GTK+ and GNOME widgets.
 
@@ -116,9 +118,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n %{lib_name}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/libatk-%{api_version}.so.%{lib_major}*
 
-%files -n %{lib_name}-devel
+%files -n %develname
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS
 %doc %{_datadir}/gtk-doc/html/*
