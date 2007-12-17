@@ -21,7 +21,6 @@ License: LGPL
 Group: Accessibility
 Url: http://developer.gnome.org/projects/gap/
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%pkgname/%pkgname-%version.tar.bz2
-Buildroot: %_tmppath/%name-%{version}-root
 BuildRequires: libglib2-devel >= %{req_glib2_version}
 %if %enable_gtkdoc
 BuildRequires:	gtk-doc >= 0.9
