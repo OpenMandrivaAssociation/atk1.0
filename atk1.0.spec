@@ -40,7 +40,7 @@ ATK, the Accessibility Tookit, is used to obtain accessibily information
 from GTK+ and GNOME widgets.
 
 %package common
-Summary: data files used by atk
+Summary: Data files used by atk
 Group: System/Libraries
 Conflicts:  %{_lib}atk1.0_0 < 1.13.1-2mdv
 # 64bit atk1.0-common conflicts with old 32bit lib as well -Anssi
