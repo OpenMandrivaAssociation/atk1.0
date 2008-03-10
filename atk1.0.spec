@@ -14,7 +14,7 @@
 %define develname %mklibname -d %{name}
 
 Name: %{pkgname}%{api_version}
-Version: 1.21.92
+Version: 1.22.0
 Release: %mkrel 1
 Summary: Accessibility features for Gtk+
 License: LGPL
