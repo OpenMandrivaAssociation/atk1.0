@@ -17,7 +17,7 @@ Name: %{pkgname}%{api_version}
 Version: 1.23.5
 Release: %mkrel 1
 Summary: Accessibility features for Gtk+
-License: LGPL
+License: LGPLv2+
 Group: Accessibility
 Url: http://developer.gnome.org/projects/gap/
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%pkgname/%pkgname-%version.tar.bz2
