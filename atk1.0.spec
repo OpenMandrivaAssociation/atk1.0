@@ -1,7 +1,7 @@
 # enable_gtkdoc: Toggle if gtkdoc stuff should be rebuilt
 #	0 = no
 #	1 = yes
-%define enable_gtkdoc	1
+%define enable_gtkdoc	0
 
 %define api_version	1.0
 %define lib_major	0
@@ -14,7 +14,7 @@
 %define develname %mklibname -d %{name}
 
 Name: %{pkgname}%{api_version}
-Version: 1.25.2
+Version: 1.26.0
 Release: %mkrel 1
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
