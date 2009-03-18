@@ -1,7 +1,7 @@
 # enable_gtkdoc: Toggle if gtkdoc stuff should be rebuilt
 #	0 = no
 #	1 = yes
-%define enable_gtkdoc	0
+%define enable_gtkdoc	1
 
 %define api_version	1.0
 %define lib_major	0
@@ -24,7 +24,7 @@ Source0: http://ftp.gnome.org/pub/GNOME/sources/%pkgname/%pkgname-%version.tar.b
 Buildroot: %_tmppath/%name-%{version}-root
 BuildRequires: libglib2-devel >= %{req_glib2_version}
 %if %enable_gtkdoc
-BuildRequires:	gtk-doc >= 0.9
+BuildRequires:	gtk-doc >= 1.11-3mdv
 %endif
 
 
