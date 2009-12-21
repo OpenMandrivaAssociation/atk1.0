@@ -91,7 +91,6 @@ from GTK+ and GNOME widgets.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-gtkdocize
 
 %build
 
