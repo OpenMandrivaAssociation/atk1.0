@@ -15,7 +15,7 @@
 
 Name: %{pkgname}%{api_version}
 Version: 1.30.0
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
 Group: Accessibility
