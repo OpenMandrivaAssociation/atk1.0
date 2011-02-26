@@ -15,7 +15,7 @@
 
 Name: %{pkgname}%{api_version}
 Version: 1.32.0
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
 Group: Accessibility
@@ -80,7 +80,7 @@ Provides:	%{pkgname}-devel = %{version}-%{release}
 Provides:	lib%{pkgname}-devel = %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Requires:	%{lib_name} = %{version}
-Requires:	libglib2.0-devel >= %{req_glib2_version}
+Requires:	libglib2-devel >= %{req_glib2_version}
 Conflicts:  libatk10-devel
 Obsoletes: %mklibname -d %{name}_ 0
 Conflicts:	gir-repository < 0.6.5-4mdv
