@@ -14,8 +14,8 @@
 %define develname %mklibname -d %{name}
 
 Name: %{pkgname}%{api_version}
-Version: 1.32.0
-Release: %mkrel 2
+Version: 2.0.0
+Release: %mkrel 1
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
 Group: Accessibility
@@ -27,7 +27,6 @@ BuildRequires: libglib2-devel >= %{req_glib2_version}
 BuildRequires:	gtk-doc >= 1.11-3mdv
 %endif
 BuildRequires: gobject-introspection-devel
-
 
 %description
 Accessibility means providing system infrastructure that allows add-on
