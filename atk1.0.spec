@@ -14,17 +14,16 @@
 %define develname %mklibname -d %{name}
 
 Name: %{pkgname}%{api_version}
-Version: 2.0.1
-Release: %mkrel 1
+Version: 2.2.0
+Release: 1
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
 Group: Accessibility
 Url: http://developer.gnome.org/projects/gap/
 Source0: http://ftp.gnome.org/pub/GNOME/sources/%pkgname/%pkgname-%version.tar.xz
-Buildroot: %_tmppath/%name-%{version}-root
 BuildRequires: libglib2-devel >= %{req_glib2_version}
 %if %enable_gtkdoc
-BuildRequires:	gtk-doc >= 1.11-3mdv
+BuildRequires:	gtk-doc >= 1.11-3
 %endif
 BuildRequires: gobject-introspection-devel
 
@@ -42,9 +41,9 @@ from GTK+ and GNOME widgets.
 %package common
 Summary: Data files used by atk
 Group: System/Libraries
-Conflicts:  %{_lib}atk1.0_0 < 1.13.1-2mdv
+Conflicts:  %{_lib}atk1.0_0 < 1.13.1-2
 # 64bit atk1.0-common conflicts with old 32bit lib as well -Anssi
-Conflicts:  libatk1.0_0 < 1.13.1-2mdv
+Conflicts:  libatk1.0_0 < 1.13.1-2
 
 %description common
 ATK, the Accessibility Tookit, is used to obtain accessibily information
@@ -61,7 +60,7 @@ Provides:	%{pkgname} = %{version}-%{release}
 Provides:	lib%{pkgname} = %{version}-%{release}
 Provides:	lib%{name} = %{version}-%{release}
 Requires:	%{name}-common >= %{version}-%{release}
-Conflicts:	gir-repository < 0.6.5-4mdv
+Conflicts:	gir-repository < 0.6.5-4
 
 %description -n %{lib_name}
 Accessibility means providing system infrastructure that allows add-on
@@ -82,7 +81,7 @@ Requires:	%{lib_name} = %{version}
 Requires:	libglib2-devel >= %{req_glib2_version}
 Conflicts:  libatk10-devel
 Obsoletes: %mklibname -d %{name}_ 0
-Conflicts:	gir-repository < 0.6.5-4mdv
+Conflicts:	gir-repository < 0.6.5-4
 
 %description -n %develname
 ATK, the Accessibility Tookit, is used to obtain accessibily information
