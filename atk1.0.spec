@@ -130,6 +130,5 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/pkgconfig/*
 %{_datadir}/gir-1.0/Atk-%{api_version}.gir
