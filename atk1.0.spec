@@ -15,7 +15,7 @@
 
 Name: %{pkgname}%{api_version}
 Version: 2.2.0
-Release: 2
+Release: 3
 Summary: Accessibility features for Gtk+
 License: LGPLv2+
 Group: Accessibility
@@ -105,10 +105,6 @@ rm -rf %{buildroot}
 
 %{find_lang} %{pkgname}10
 
-# clean .la files
-rm -f %{buildroot}%{_libdir}/*.la
-
-
 %if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
 %endif
@@ -130,5 +126,6 @@ rm -f %{buildroot}%{_libdir}/*.la
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/*.a
+%{_libdir}/*.la
 %{_libdir}/pkgconfig/*
 %{_datadir}/gir-1.0/Atk-%{api_version}.gir
