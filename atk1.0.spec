@@ -81,7 +81,7 @@ from GTK+ and GNOME widgets.
 
 %build
 %configure2_5x \
-	--enable-static \
+	--disable-static \
 %if %enable_gtkdoc
 	--enable-gtk-doc
 %endif
