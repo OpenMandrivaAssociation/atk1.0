@@ -1,20 +1,22 @@
 %define enable_gtkdoc	0
 
-%define api_version	1.0
-%define lib_major	0
-%define pkgname     atk
-%define lib_name %mklibname %{name}_ %{lib_major}
+%define api		1.0
+%define major	0
+%define pkgname	atk
+%define libname %mklibname %{pkgname} %{api} %{major}
+%define girname %mklibname %{pkgname}-gir %{api}
 %define develname %mklibname -d %{name}
 
-Name: %{pkgname}%{api_version}
-Version: 2.2.0
-Release: 4
-Summary: Accessibility features for Gtk+
-License: LGPLv2+
-Group: Accessibility
-Url: http://developer.gnome.org/projects/gap/
-Source0: http://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.xz
-%if %enable_gtkdoc
+Summary:	Accessibility features for Gtk+
+Name:		%{pkgname}%{api}
+Version:	2.4.0
+Release:	1
+License:	LGPLv2+
+Group:		Accessibility
+Url:		http://developer.gnome.org/projects/gap/
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.xz
+
+%if %{enable_gtkdoc}
 BuildRequires:	gtk-doc >= 1.11-3
 %endif
 BuildRequires: pkgconfig(glib-2.0) >= 2.5.7
@@ -32,11 +34,8 @@ ATK, the Accessibility Tookit, is used to obtain accessibily information
 from GTK+ and GNOME widgets.
 
 %package common
-Summary: Data files used by atk
-Group: System/Libraries
-Conflicts:  %{_lib}atk1.0_0 < 1.13.1-2
-# 64bit atk1.0-common conflicts with old 32bit lib as well -Anssi
-Conflicts:  libatk1.0_0 < 1.13.1-2
+Summary:	Data files used by atk
+Group:		System/Libraries
 
 %description common
 ATK, the Accessibility Tookit, is used to obtain accessibily information
@@ -44,17 +43,13 @@ from GTK+ and GNOME widgets.
 
 This package contains data used by atk library.
 
-%package -n %{lib_name}
-Summary: Accessibility features for Gtk+
-Group: System/Libraries
+%package -n %{libname}
+Summary:	Accessibility features for Gtk+
+Group:		System/Libraries
 Suggests:	%{name}-common >= %{version}-%{release}
-Provides:	%{pkgname} = %{version}-%{release}
-Provides:	lib%{pkgname} = %{version}-%{release}
-Provides:	lib%{name} = %{version}-%{release}
-Obsoletes:	%{pkgname} lib%{pkgname}
 Conflicts:	gir-repository < 0.6.5-4
 
-%description -n %{lib_name}
+%description -n %{libname}
 Accessibility means providing system infrastructure that allows add-on
 assistive software to transparently provide specalized input and ouput
 capabilities. For example, screen readers allow blind users to navigate
@@ -62,14 +57,21 @@ through applications, determine the state of controls, and read text via
 text to speech conversion. On-screen keyboards replace physical
 keyboards, and head-mounted pointers replace mice.
 
+%package -n %{girname}
+Summary:	GObject introspection interface library for %{pkgname}
+Group:		System/Libraries
+Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	%{_lib}atk1.0_0 < 2.4.0-1
+
+%description -n %{girname}
+GObject introspection interface library for %{pkgname}.
+
 %package -n %{develname}
-Summary: Stuff for developing with atk
-Group: Development/C
-Obsoletes:	%{pkgname}-devel lib%{pkgname}-devel
+Summary:	Stuff for developing with atk
+Group:		Development/C
 Provides:	%{pkgname}-devel = %{version}-%{release}
-Requires:	%{lib_name} = %{version}-%{release}
-Conflicts:  libatk10-devel
-Obsoletes: %mklibname -d %{name}_ 0
+Requires:	%{libname} = %{version}-%{release}
+Obsoletes:	%{_lib}atk1.0_0-devel
 Conflicts:	gir-repository < 0.6.5-4
 
 %description -n %{develname}
@@ -82,24 +84,25 @@ from GTK+ and GNOME widgets.
 %build
 %configure2_5x \
 	--disable-static \
-%if %enable_gtkdoc
+%if %{enable_gtkdoc}
 	--enable-gtk-doc
 %endif
 
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 find %{buildroot} -name "*.la" -delete
-%{find_lang} %{pkgname}10
+%find_lang %{pkgname}10
 
 %files common -f %{pkgname}10.lang
 %doc README
 
-%files -n %{lib_name}
-%{_libdir}/libatk-%{api_version}.so.%{lib_major}*
-%{_libdir}/girepository-1.0/Atk-%{api_version}.typelib
+%files -n %{libname}
+%{_libdir}/libatk-%{api}.so.%{major}*
+
+%files -n %{girname}
+%{_libdir}/girepository-1.0/Atk-%{api}.typelib
 
 %files -n %{develname}
 %doc AUTHORS ChangeLog NEWS
@@ -107,4 +110,5 @@ find %{buildroot} -name "*.la" -delete
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
-%{_datadir}/gir-1.0/Atk-%{api_version}.gir
+%{_datadir}/gir-1.0/Atk-%{api}.gir
+
