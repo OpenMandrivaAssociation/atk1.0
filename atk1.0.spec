@@ -10,7 +10,7 @@
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
 Version:	2.4.0
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
@@ -60,7 +60,6 @@ keyboards, and head-mounted pointers replace mice.
 %package -n %{girname}
 Summary:	GObject introspection interface library for %{pkgname}
 Group:		System/Libraries
-Requires:	%{libname} = %{version}-%{release}
 Obsoletes:	%{_lib}atk1.0_0 < 2.4.0-1
 
 %description -n %{girname}
@@ -71,6 +70,7 @@ Summary:	Stuff for developing with atk
 Group:		Development/C
 Provides:	%{pkgname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
+Requires:	%{girname} = %{version}-%{release}
 Obsoletes:	%{_lib}atk1.0_0-devel
 Conflicts:	gir-repository < 0.6.5-4
 
