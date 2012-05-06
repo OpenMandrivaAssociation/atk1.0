@@ -1,3 +1,5 @@
+%define url_ver %(echo %{version}|cut -d. -f1,2) 
+
 %define enable_gtkdoc	0
 
 %define api		1.0
@@ -14,7 +16,7 @@ Release:	3
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{pkgname}/%{pkgname}-%{version}.tar.xz
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/atk/%{url_ver}/%{pkgname}-%{version}.tar.xz
 
 %if %{enable_gtkdoc}
 BuildRequires:	gtk-doc >= 1.11-3
@@ -79,7 +81,7 @@ ATK, the Accessibility Tookit, is used to obtain accessibily information
 from GTK+ and GNOME widgets.
 
 %prep
-%setup -q -n %{pkgname}-%{version}
+%setup -qn %{pkgname}-%{version}
 
 %build
 %configure2_5x \
