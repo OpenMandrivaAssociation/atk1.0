@@ -10,7 +10,7 @@
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.6.0
+Version:	2.8.0
 Release:	1
 License:	LGPLv2+
 Group:		Accessibility
