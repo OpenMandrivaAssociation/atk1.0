@@ -7,6 +7,7 @@
 %define libname %mklibname %{pkgname} %{api} %{major}
 %define girname %mklibname %{pkgname}-gir %{api}
 %define devname %mklibname -d %{name}
+%bcond_with	bootstrap
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
@@ -58,6 +59,7 @@ through applications, determine the state of controls, and read text via
 text to speech conversion. On-screen keyboards replace physical
 keyboards, and head-mounted pointers replace mice.
 
+%if !%{with bootstrap}
 %package -n %{girname}
 Summary:	GObject introspection interface library for %{pkgname}
 Group:		System/Libraries
@@ -65,13 +67,16 @@ Obsoletes:	%{_lib}atk1.0_0 < 2.4.0-1
 
 %description -n %{girname}
 GObject introspection interface library for %{pkgname}.
+%endif
 
 %package -n %{devname}
 Summary:	Stuff for developing with atk
 Group:		Development/C
 Provides:	%{pkgname}-devel = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
+%if !%{with bootstrap}
 Requires:	%{girname} = %{version}-%{release}
+%endif
 Obsoletes:	%{_lib}atk1.0_0-devel
 
 %description -n %{devname}
@@ -84,6 +89,9 @@ from GTK+ and GNOME widgets.
 %build
 %configure2_5x \
 	--disable-static \
+%if %{with bootstrap}
+	--enable-introspection=no \
+%endif
 %if %{enable_gtkdoc}
 	--enable-gtk-doc
 %endif
@@ -100,8 +108,10 @@ from GTK+ and GNOME widgets.
 %files -n %{libname}
 %{_libdir}/libatk-%{api}.so.%{major}*
 
+%if !%{with bootstrap}
 %files -n %{girname}
 %{_libdir}/girepository-1.0/Atk-%{api}.typelib
+%endif
 
 %files -n %{devname}
 %doc AUTHORS ChangeLog NEWS
@@ -109,5 +119,6 @@ from GTK+ and GNOME widgets.
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
+%if !%{with bootstrap}
 %{_datadir}/gir-1.0/Atk-%{api}.gir
-
+%endif
