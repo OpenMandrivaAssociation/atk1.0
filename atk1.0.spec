@@ -85,6 +85,10 @@ from GTK+ and GNOME widgets.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
+for f in config.guess config.sub ; do
+        test -f /usr/share/libtool/config/$f || continue
+        find . -type f -name $f -exec cp /usr/share/libtool/config/$f \{\} \;
+done
 
 %build
 %configure2_5x \
