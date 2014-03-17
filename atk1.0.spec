@@ -11,7 +11,7 @@
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.11.4
+Version:	2.11.90
 Release:	1
 License:	LGPLv2+
 Group:		Accessibility
@@ -126,4 +126,5 @@ done
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Atk-%{api}.gir
 %endif
+
 
