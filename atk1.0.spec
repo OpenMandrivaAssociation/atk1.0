@@ -11,12 +11,12 @@
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.12.0
-Release:	3
+Version:	2.13.90
+Release:	1
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
-Source0:	https://download.gnome.org/sources/atk/2.12/atk-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/atk/2.13/atk-%{version}.tar.xz
 
 %if %{enable_gtkdoc}
 BuildRequires:	gtk-doc >= 1.11-3
@@ -126,5 +126,3 @@ done
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Atk-%{api}.gir
 %endif
-
-
