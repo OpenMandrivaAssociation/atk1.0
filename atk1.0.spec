@@ -1,18 +1,18 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 %define enable_gtkdoc	0
 
-%define api	1.0
-%define major	0
-%define pkgname	atk
-%define libname %mklibname %{pkgname} %{api} %{major}
-%define girname %mklibname %{pkgname}-gir %{api}
-%define devname %mklibname -d %{name}
+%define	api 1.0
+%define	major 0
+%define	pkgname atk
+%define	libname %mklibname %{pkgname} %{api} %{major}
+%define	girname %mklibname %{pkgname}-gir %{api}
+%define	devname %mklibname -d %{name}
 %bcond_with	bootstrap
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.18.0
-Release:	3
+Version:	2.22.0
+Release:	1
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
@@ -86,12 +86,12 @@ from GTK+ and GNOME widgets.
 %prep
 %setup -q -n %{pkgname}-%{version}
 for f in config.guess config.sub ; do
-        test -f /usr/share/libtool/config/$f || continue
-        find . -type f -name $f -exec cp /usr/share/libtool/config/$f \{\} \;
+    test -f /usr/share/libtool/config/$f || continue
+    find . -type f -name $f -exec cp /usr/share/libtool/config/$f \{\} \;
 done
 
 %build
-%configure2_5x \
+%configure \
 	--disable-static \
 %if %{with bootstrap}
 	--enable-introspection=no \
@@ -118,7 +118,6 @@ done
 %endif
 
 %files -n %{devname}
-%doc AUTHORS ChangeLog NEWS
 %doc %{_datadir}/gtk-doc/html/*
 %{_includedir}/*
 %{_libdir}/*.so
@@ -126,5 +125,3 @@ done
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Atk-%{api}.gir
 %endif
-
-
