@@ -11,7 +11,7 @@
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.26.1
+Version:	2.28.1
 Release:	1
 License:	LGPLv2+
 Group:		Accessibility
