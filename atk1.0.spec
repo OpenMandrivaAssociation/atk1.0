@@ -1,5 +1,4 @@
 %define url_ver %(echo %{version}|cut -d. -f1,2)
-%define enable_gtkdoc	0
 
 %define	api 1.0
 %define	major 0
@@ -8,19 +7,21 @@
 %define	girname %mklibname %{pkgname}-gir %{api}
 %define	devname %mklibname -d %{name}
 %bcond_with	bootstrap
+%bcond_with	gtk_doc
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
-Version:	2.28.1
-Release:	2
+Version:	2.30.0
+Release:	1
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
 Source0:	https://download.gnome.org/sources/atk/%(echo %{version} |cut -d. -f1-2)/atk-%{version}.tar.xz
 
-%if %{enable_gtkdoc}
+%if %{with gtkdoc}
 BuildRequires:	gtk-doc >= 1.11-3
 %endif
+BuildRequires:	meson
 BuildRequires:	pkgconfig(glib-2.0) >= 2.5.7
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
 
@@ -85,25 +86,13 @@ from GTK+ and GNOME widgets.
 
 %prep
 %setup -q -n %{pkgname}-%{version}
-for f in config.guess config.sub ; do
-    test -f /usr/share/libtool/config/$f || continue
-    find . -type f -name $f -exec cp /usr/share/libtool/config/$f \{\} \;
-done
 
 %build
-%configure \
-	--disable-static \
-%if %{with bootstrap}
-	--enable-introspection=no \
-%endif
-%if %{enable_gtkdoc}
-	--enable-gtk-doc
-%endif
-
-%make
+%meson
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 %find_lang %{pkgname}10
 
 %files common -f %{pkgname}10.lang
@@ -118,7 +107,9 @@ done
 %endif
 
 %files -n %{devname}
+%if %{with gtkdoc}
 %doc %{_datadir}/gtk-doc/html/*
+%endif
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/*
