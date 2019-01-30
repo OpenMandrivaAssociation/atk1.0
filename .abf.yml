@@ -1,2 +1,4 @@
-sources:
+removed_sources:
   atk-2.22.0.tar.xz: bcb9ee62a0fd1d9262684d20b429bc8f5b2c4eaa
+sources:
+  atk-2.26.1.tar.xz: 78f33bdbacbc447c86a357690417c1b70e7664fc
