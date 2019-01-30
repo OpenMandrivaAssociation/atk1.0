@@ -16,7 +16,7 @@ Release:	2
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
-Source0:	https://download.gnome.org/sources/atk/%(echo %{version} |cut -d. -f1-2)/atk-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/atk/%{url_ver}/atk-%{version}.tar.xz
 
 %if %{with gtkdoc}
 BuildRequires:	gtk-doc >= 1.11-3
