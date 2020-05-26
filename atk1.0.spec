@@ -1,3 +1,10 @@
+# Wine uses atk
+%ifarch %{x86_64}
+%bcond_without compat32
+%else
+%bcond_with compat32
+%endif
+
 %define url_ver %(echo %{version}|cut -d. -f1,2)
 
 %define	api 1.0
@@ -8,11 +15,13 @@
 %define	devname %mklibname -d %{name}
 %bcond_with	bootstrap
 %bcond_with	gtk_doc
+%define lib32name lib%{pkgname}%{api}_%{major}
+%define dev32name lib%{name}-devel
 
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
 Version:	2.36.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
@@ -24,6 +33,9 @@ BuildRequires:	gtk-doc >= 1.11-3
 BuildRequires:	meson
 BuildRequires:	pkgconfig(glib-2.0) >= 2.5.7
 BuildRequires:	pkgconfig(gobject-introspection-1.0)
+%if %{with compat32}
+BuildRequires:	devel(libglib-2.0)
+%endif
 
 %description
 Accessibility means providing system infrastructure that allows add-on
@@ -50,7 +62,6 @@ This package contains data used by atk library.
 Summary:	Accessibility features for Gtk+
 Group:		System/Libraries
 Suggests:	%{name}-common >= %{version}-%{release}
-Provides:	lib%{name} = %{version}-%{release}
 
 %description -n %{libname}
 Accessibility means providing system infrastructure that allows add-on
@@ -84,14 +95,48 @@ Obsoletes:	%{_lib}atk1.0_0-devel
 ATK, the Accessibility Tookit, is used to obtain accessibily information
 from GTK+ and GNOME widgets.
 
+%if %{with compat32}
+%package -n %{lib32name}
+Summary:	Accessibility features for Gtk+ (32-bit)
+Group:		System/Libraries
+Suggests:	%{name}-common >= %{version}-%{release}
+
+%description -n %{lib32name}
+Accessibility means providing system infrastructure that allows add-on
+assistive software to transparently provide specalized input and ouput
+capabilities. For example, screen readers allow blind users to navigate
+through applications, determine the state of controls, and read text via
+text to speech conversion. On-screen keyboards replace physical
+keyboards, and head-mounted pointers replace mice.
+
+%package -n %{dev32name}
+Summary:	Stuff for developing with atk
+Group:		Development/C
+Requires:	%{devname} = %{version}-%{release}
+Requires:	%{lib32name} = %{version}-%{release}
+
+%description -n %{dev32name}
+ATK, the Accessibility Tookit, is used to obtain accessibily information
+from GTK+ and GNOME widgets.
+%endif
+
 %prep
-%setup -q -n %{pkgname}-%{version}
+%autosetup -p1 -n %{pkgname}-%{version}
+%if %{with compat32}
+%meson32 -Dintrospection=false
+%endif
+%meson
 
 %build
-%meson
+%if %{with compat32}
+%ninja_build -C build32
+%endif
 %meson_build
 
 %install
+%if %{with compat32}
+%ninja_install -C build32
+%endif
 %meson_install
 %find_lang %{pkgname}10
 
@@ -115,4 +160,13 @@ from GTK+ and GNOME widgets.
 %{_libdir}/pkgconfig/*
 %if !%{with bootstrap}
 %{_datadir}/gir-1.0/Atk-%{api}.gir
+%endif
+
+%if %{with compat32}
+%files -n %{lib32name}
+%{_prefix}/lib/libatk-%{api}.so.%{major}*
+
+%files -n %{dev32name}
+%{_prefix}/lib/*.so
+%{_prefix}/lib/pkgconfig/*
 %endif
