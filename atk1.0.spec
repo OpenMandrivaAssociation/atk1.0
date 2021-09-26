@@ -21,7 +21,7 @@
 Summary:	Accessibility features for Gtk+
 Name:		%{pkgname}%{api}
 Version:	2.36.0
-Release:	4
+Release:	5
 License:	LGPLv2+
 Group:		Accessibility
 Url:		http://developer.gnome.org/projects/gap/
