@@ -24,7 +24,7 @@ Version:	2.38.0
 Release:	2
 License:	LGPLv2+
 Group:		Accessibility
-Url:		http://developer.gnome.org/projects/gap/
+Url:		https://developer.gnome.org/projects/gap/
 Source0:	https://download.gnome.org/sources/atk/%{url_ver}/atk-%{version}.tar.xz
 
 %if %{with gtkdoc}
